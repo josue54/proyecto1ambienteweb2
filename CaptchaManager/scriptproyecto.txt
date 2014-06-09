@@ -1,0 +1,42 @@
+create database CaptchaManager
+
+use CaptchaManager
+
+
+create table soundsFormat(
+ [id] int,
+ [description] varchar(50) not null default(''),
+ constraint pk_soundsFormat primary key (id)
+)
+
+create table imagesFormat(
+ [id] int,
+ [description] varchar(50) not null default(''),
+ constraint pk_imagesFormat primary key (id)
+)
+
+create table imagesComplex(
+ [id] int,
+ [description] varchar(50) not null default(''),
+ constraint pk_imagesComplex primary key (id)
+)
+
+create table users(
+ [id] int identity,
+ [serial] varchar(50) null default(''),
+ [type] varchar(50) not null default(''),
+ constraint pk_users primary key (id)
+)
+
+create table captchas(
+[id] int identity,
+[image] varchar (150) not null default(''),
+[sound] varchar (150) not null default(''),
+[soundFormat] int ,
+constraint fk_captchas_soundsFormatId foreign key (soundFormat) references soundsFormat(id),
+[imageFormat] int ,
+constraint fk_captchas_imagesFormatId foreign key (imageFormat) references imagesFormat(id),
+[imageComplex] int ,
+constraint fk_captchas_imagesComplexId foreign key (imageComplex) references imagesComplex(id),
+constraint pk_captchas primary key (id)
+)
